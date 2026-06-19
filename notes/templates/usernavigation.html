@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+  {% load static %}
+  <title>NotesShare - Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="">
+        <span style="color: #6C63FF; font-weight: 800;">Notes</span><span style="color: #FF6584; font-weight: 800;">Share</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-home"></i> HOME</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'upload_notes' %}"><i class="fas fa-cloud-upload-alt"></i> UPLOAD NOTES</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'view_mynotes' %}"><i class="fas fa-eye"></i> MY NOTES</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'viewallnotes' %}"><i class="fas fa-folder-open"></i> ALL NOTES</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-power-off"></i> LOGOUT</a>
+            </li>
+        </ul>
+
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button"
+                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <i class="fas fa-user-circle"></i> {{request.user.first_name|default:request.user.username}}
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{% url 'profile' %}"><i class="fas fa-id-card"></i> Profile</a>
+                <a class="dropdown-item" href="{% url 'edit_profile' %}"><i class="fas fa-edit"></i> Edit Profile</a>
+                <a class="dropdown-item" href="{% url 'changepassword' %}"><i class="fas fa-key"></i> Change Password</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+{% block body %}
+
+{% endblock %}
+
+</body>
+</html>

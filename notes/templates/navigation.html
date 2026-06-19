@@ -1,0 +1,103 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Note Sharing</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+
+<div class="particles">
+    <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="particle" style="left: 25%; animation-delay: 3s; background: #FF6584;"></div>
+    <div class="particle" style="left: 40%; animation-delay: 1.5s;"></div>
+    <div class="particle" style="left: 60%; animation-delay: 4s; background: #00D2FF;"></div>
+    <div class="particle" style="left: 80%; animation-delay: 2s; background: #FF6584;"></div>
+</div>
+
+<header>
+    <div id="menu" class="fas fa-bars"></div>
+    <a href="{% url 'index' %}" class="logo"><i class="fas fa-book-reader"></i> NotesShare</a>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'login_admin' %}">Admin</a></li>
+        </ul>
+    </nav>
+</header>
+
+{% block body %}
+
+{% endblock %}
+
+<div class="footer">
+    <div class="box-container">
+        <div class="box">
+            <h3>Quick Links</h3>
+            <a href="{% url 'index' %}">home</a>
+            <a href="{% url 'about' %}">about</a>
+            <a href="{% url 'contact' %}">contact</a>
+       </div>
+
+        <div class="box">
+            <h3>Accounts</h3>
+            <a href="{% url 'signup' %}">create account</a>
+            <a href="{% url 'login' %}">user login</a>
+            <a href="{% url 'login_admin' %}">admin login</a>
+        </div>
+
+        <div class="box">
+            <h3>Contact Info</h3>
+            <p> <i class="fas fa-map-marker-alt"></i> Nagpur, India </p>
+            <p> <i class="fas fa-envelope"></i> sanketsd592@gmail.com </p>
+            <p> <i class="fas fa-phone"></i> +91 9623723169 </p>
+        </div>
+    </div>
+    <h1 class="credit">&copy; 2026 <a href="#">NotesShare</a>. All Rights Reserved</h1>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{% static 'js/script.js' %}"></script>
+
+<script>
+// Scroll reveal animation
+function revealOnScroll() {
+    const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+    reveals.forEach(el => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        const revealPoint = 120;
+        if (elementTop < windowHeight - revealPoint) {
+            el.classList.add('active');
+        }
+    });
+}
+
+// Navbar shrink on scroll
+document.addEventListener('scroll', function() {
+    const header = document.querySelector('header');
+    if (header) {
+        header.classList.toggle('scrolled', window.scrollY > 80);
+    }
+});
+
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
+</script>
+
+</body>
+</html>

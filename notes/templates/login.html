@@ -1,0 +1,45 @@
+{% extends 'navigation.html'%}
+{% load static %}
+{% block body %}
+
+{% if error == "no" %}
+<script>
+	alert('Logged In Successfully...');
+	window.location=('{% url 'profile' %}');
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+	alert('Invalid Login Credentials, Try Again');
+</script>
+{% endif %}
+
+<section class="userlog" id="userlog">
+<h1 class="heading reveal">User <span>Login</span></h1>
+<p class="sub-heading reveal" style="transition-delay: 0.15s;">Welcome back! Login to access your notes dashboard.</p>
+
+<div class="row">
+    <div class="image reveal-left">
+        <img src="{% static 'images/webinar-pana.png' %}" alt="">
+    </div>
+    <form method="post" class="reveal-right">
+        {% csrf_token %}
+
+        <div class="input-group">
+            <i class="fas fa-envelope input-icon"></i>
+            <input type="email" placeholder="Enter Email ID" name="emailid" class="box">
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" placeholder="Enter Password" name="pwd" class="box">
+        </div>
+
+        <p>Don't have an account? <a href="{% url 'signup' %}">Register now</a></p>
+        <button type="submit" class="btn">Login <i class="fas fa-arrow-right"></i></button>
+    </form>
+</div>
+</section>
+
+{% endblock %}

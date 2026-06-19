@@ -1,0 +1,37 @@
+{% extends 'navigation.html'%}
+{% load static %}
+{% block body %}
+
+<section class="about" id="about">
+
+    <div class="image reveal-left">
+        <img src="{% static 'images/Learning-amico.png' %}" alt="">
+    </div>
+
+    <div class="content reveal-right">
+        <h3>About <span>NotesShare</span></h3>
+        <p>NotesShare is a modern platform for students to upload, share, and discover study notes across all academic branches. Built with Python Django, it provides a seamless experience for collaborative learning.</p>
+
+        <div class="features-grid stagger-children">
+            <div class="feature-item">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <span>Upload Notes</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-search"></i>
+                <span>Discover Resources</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-users"></i>
+                <span>Collaborate</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-shield-alt"></i>
+                <span>Secure & Private</span>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+{% endblock %}
