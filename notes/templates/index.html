@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Note Sharing</title>
+    <title>NotesShare & PYQShare</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,28 +13,373 @@
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #0F0C29;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 7%;
+    background: rgba(15, 12, 41, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.logo i { color: #6C63FF; }
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+}
+
+.navbar ul li a {
+    font-size: 1.4rem;
+    color: #aaa;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.navbar ul li a:hover, .navbar ul li a.active {
+    color: #fff;
+    background: rgba(255,255,255,0.08);
+}
+
+#menu { display: none; font-size: 2.5rem; cursor: pointer; }
+
+section { padding: 6rem 7%; }
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #0F0C29, #302B63, #24243E);
+    position: relative;
+    overflow: hidden;
+    padding-top: 10rem;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(108,99,255,0.15), transparent);
+    top: -200px;
+    right: -200px;
+    border-radius: 50%;
+    animation: floatBg 20s ease-in-out infinite;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,101,132,0.1), transparent);
+    bottom: -100px;
+    left: -100px;
+    border-radius: 50%;
+    animation: floatBg 25s ease-in-out infinite reverse;
+}
+
+@keyframes floatBg {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(50px, -30px) scale(1.1); }
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 800px; }
+
+.badge {
+    display: inline-block;
+    padding: 0.6rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(108,99,255,0.2);
+    border: 1px solid rgba(108,99,255,0.4);
+    border-radius: 50px;
+    margin-bottom: 2rem;
+}
+
+.hero h1 {
+    font-size: 6rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.hero h1 span {
+    background: linear-gradient(135deg, #6C63FF, #FF6584);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero p {
+    font-size: 1.6rem;
+    color: #aaa;
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.8;
+}
+
+.tags {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+}
+
+.tags span {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.2rem;
+    color: #ccc;
+    background: rgba(255,255,255,0.06);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.tags span i { color: #6C63FF; }
+
+.btn {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #6C63FF, #FF6584);
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(108,99,255,0.4);
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(108,99,255,0.6); }
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid #6C63FF;
+    box-shadow: none;
+}
+
+.btn-outline:hover { background: linear-gradient(135deg, #6C63FF, #FF6584); border-color: transparent; }
+
+.btn-group { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+    gap: 2.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.card {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 3.5rem 2.5rem;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(108,99,255,0.3);
+    box-shadow: 0 15px 40px rgba(108,99,255,0.1);
+}
+
+.card .icon {
+    width: 6rem;
+    height: 6rem;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, #6C63FF, #FF6584);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    color: #fff;
+}
+
+.card h3 { font-size: 1.8rem; margin-bottom: 1rem; }
+.card p { font-size: 1.3rem; color: #aaa; line-height: 1.8; }
+
+.heading {
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.heading span {
+    background: linear-gradient(135deg, #6C63FF, #FF6584);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sub-heading {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #aaa;
+    margin-bottom: 4rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pyq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto 3rem;
+}
+
+.pyq-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 2.5rem;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.pyq-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(108,99,255,0.3);
+}
+
+.pyq-card .pyq-icon i { font-size: 2.5rem; color: #6C63FF; margin-bottom: 1rem; }
+.pyq-card h3 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+.pyq-card p { font-size: 1.2rem; color: #aaa; margin-bottom: 1.2rem; }
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.step { text-align: center; }
+
+.step-num {
+    width: 6rem;
+    height: 6rem;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, #6C63FF, #FF6584);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.step h3 { font-size: 1.8rem; margin-bottom: 0.8rem; }
+.step p { font-size: 1.3rem; color: #aaa; max-width: 28rem; margin: 0 auto; line-height: 1.8; }
+
+.cta {
+    text-align: center;
+    padding: 8rem 7%;
+    background: linear-gradient(135deg, #0F0C29, #302B63);
+}
+
+.cta h2 { font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; }
+.cta h2 span { background: linear-gradient(135deg, #6C63FF, #FF6584); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.cta p { font-size: 1.5rem; color: #aaa; max-width: 500px; margin: 0 auto 2.5rem; }
+
+.footer {
+    background: #0a0a1a;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 4rem 7% 2rem;
+}
+
+.footer .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+    gap: 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.footer .box { text-align: center; }
+.footer .box h3 { font-size: 1.8rem; margin-bottom: 1rem; position: relative; display: inline-block; }
+.footer .box h3::after { content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); width: 40px; height: 3px; background: linear-gradient(135deg, #6C63FF, #FF6584); border-radius: 2px; }
+.footer .box p, .footer .box a { font-size: 1.3rem; color: #aaa; padding: 0.3rem 0; display: block; text-decoration: none; }
+.footer .box a:hover { color: #6C63FF; }
+.footer .box p i { color: #6C63FF; padding-right: 0.5rem; }
+.credit { text-align: center; font-size: 1.3rem; color: #aaa; padding: 2rem 1rem 0; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 3rem; }
+.credit a { color: #6C63FF; text-decoration: none; font-weight: 600; }
+
+@media (max-width: 768px) {
+    html { font-size: 55%; }
+    #menu { display: block; }
+    .navbar {
+        position: fixed;
+        top: -120%;
+        left: 0;
+        width: 100%;
+        background: rgba(15,12,41,0.98);
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        transition: 0.4s;
+    }
+    .navbar ul { flex-flow: column; padding: 2rem 0; }
+    .navbar ul li { text-align: center; }
+    .navbar ul li a { display: block; font-size: 1.8rem; }
+    .navbar.nav-toggle { top: 7rem; }
+    .hero h1 { font-size: 4rem; }
+    section { padding: 4rem 5%; }
+}
+</style>
+
 </head>
 <body>
 
-<div class="floating-shape"></div>
-<div class="floating-shape"></div>
-<div class="floating-shape"></div>
-
-<div class="particles">
-    <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
-    <div class="particle" style="left: 20%; animation-delay: 2s; background: #FF6584;"></div>
-    <div class="particle" style="left: 35%; animation-delay: 4s;"></div>
-    <div class="particle" style="left: 50%; animation-delay: 1s; background: #00D2FF;"></div>
-    <div class="particle" style="left: 65%; animation-delay: 3s; background: #FF6584;"></div>
-    <div class="particle" style="left: 75%; animation-delay: 5s;"></div>
-    <div class="particle" style="left: 85%; animation-delay: 2.5s; background: #00D2FF;"></div>
-    <div class="particle" style="left: 95%; animation-delay: 4.5s;"></div>
-</div>
-
 <header>
     <div id="menu" class="fas fa-bars"></div>
-    <a href="{% url 'index' %}" class="logo"><i class="fas fa-book-reader"></i> NotesShare</a>
-
+    <a href="{% url 'index' %}" class="logo"><i class="fas fa-book-reader"></i> NotesShare & PYQShare</a>
     <nav class="navbar">
         <ul>
             <li><a class="active" href="{% url 'index' %}">Home</a></li>
@@ -47,17 +392,132 @@
     </nav>
 </header>
 
-<section class="home" id="home">
+<div class="hero">
     <div class="hero-content">
-        <h1 class="reveal">Share <span>Notes</span><br>Learn Together</h1>
-        <p class="reveal" style="transition-delay: 0.2s;">Upload, share, and discover study notes from students across all branches. Collaborate and excel in your academic journey.</p>
-        <div class="btn-group reveal" style="transition-delay: 0.4s;">
-            <a href="{% url 'signup' %}" class="btn pulse-ring">Get Started <i class="fas fa-arrow-right"></i></a>
-            <a href="{% url 'about' %}" class="btn btn-outline">Learn More</a>
+        <div class="badge">📚 Notes & PYQs Platform</div>
+        <h1>Share <span>Notes</span> & <span>PYQs</span><br>Learn Together</h1>
+        <p>Upload, share, and discover study notes and previous year questions from students across all branches. Ace your exams with the right resources.</p>
+        <div class="tags">
+            <span><i class="fas fa-file-alt"></i> Study Notes</span>
+            <span><i class="fas fa-history"></i> PYQs</span>
+            <span><i class="fas fa-check-circle"></i> Verified Content</span>
+        </div>
+        <div class="btn-group">
+            <a href="{% url 'signup' %}" class="btn pulse-ring">Get Started Free <i class="fas fa-arrow-right"></i></a>
+            <a href="{% url 'about' %}" class="btn btn-outline">Explore Resources</a>
         </div>
     </div>
-    <div class="shape"></div>
+</div>
+
+<section>
+    <h1 class="heading">Why <span>NotesShare & PYQShare?</span></h1>
+    <p class="sub-heading">Your one-stop platform for study notes and previous year questions.</p>
+    <div class="grid-3">
+        <div class="card">
+            <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+            <h3>Upload Notes & PYQs</h3>
+            <p>Share your study notes and previous year question papers in multiple formats. Help fellow students prepare better.</p>
+        </div>
+        <div class="card">
+            <div class="icon"><i class="fas fa-history"></i></div>
+            <h3>Previous Year Questions</h3>
+            <p>Access a vast collection of PYQs from all branches and semesters. Practice with real exam papers and boost your preparation.</p>
+        </div>
+        <div class="card">
+            <div class="icon"><i class="fas fa-shield-alt"></i></div>
+            <h3>Quality Checked</h3>
+            <p>All notes and PYQs are reviewed by administrators to ensure quality content for every student.</p>
+        </div>
+        <div class="card">
+            <div class="icon"><i class="fas fa-search"></i></div>
+            <h3>Smart Search</h3>
+            <p>Find notes and PYQs by branch, subject, semester, or keyword. Quick and effortless discovery.</p>
+        </div>
+        <div class="card">
+            <div class="icon"><i class="fas fa-trophy"></i></div>
+            <h3>Exam-Focused</h3>
+            <p>Targeted resources from unit-wise notes to complete PYQ papers designed to help you ace your exams.</p>
+        </div>
+        <div class="card">
+            <div class="icon"><i class="fas fa-infinity"></i></div>
+            <h3>Unlimited Access</h3>
+            <p>No restrictions on uploads or downloads. Access all notes and PYQs anytime, completely free.</p>
+        </div>
+    </div>
 </section>
+
+<section style="background: #0a0a1e;">
+    <h1 class="heading">Previous Year <span>Questions</span></h1>
+    <p class="sub-heading">Browse PYQs from past examinations across all branches and semesters.</p>
+    <div class="pyq-grid">
+        <div class="pyq-card">
+            <div class="pyq-icon"><i class="fas fa-laptop-code"></i></div>
+            <h3>Computer Science</h3>
+            <p>DSA, DBMS, OS, CN, and more</p>
+        </div>
+        <div class="pyq-card">
+            <div class="pyq-icon"><i class="fas fa-microchip"></i></div>
+            <h3>Electronics & Telecom</h3>
+            <p>VLSI, DSP, Communication, IoT</p>
+        </div>
+        <div class="pyq-card">
+            <div class="pyq-icon"><i class="fas fa-cogs"></i></div>
+            <h3>Mechanical Engineering</h3>
+            <p>Thermodynamics, CAD, Manufacturing</p>
+        </div>
+        <div class="pyq-card">
+            <div class="pyq-icon"><i class="fas fa-bolt"></i></div>
+            <h3>Electrical Engineering</h3>
+            <p>Power Systems, Machines, Control</p>
+        </div>
+        <div class="pyq-card">
+            <div class="pyq-icon"><i class="fas fa-drafting-compass"></i></div>
+            <h3>Civil Engineering</h3>
+            <p>Structures, Geotech, Surveying</p>
+        </div>
+        <div class="pyq-card">
+            <div class="pyq-icon"><i class="fas fa-flask"></i></div>
+            <h3>Science & Humanities</h3>
+            <p>Maths, Physics, Chemistry, English</p>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 2rem;">
+        <a href="{% url 'signup' %}" class="btn">Browse All PYQs <i class="fas fa-arrow-right"></i></a>
+    </div>
+</section>
+
+<section>
+    <h1 class="heading">How It <span>Works</span></h1>
+    <p class="sub-heading">Get started in three simple steps.</p>
+    <div class="steps">
+        <div class="step">
+            <div class="step-num">1</div>
+            <h3>Create an Account</h3>
+            <p>Sign up for free with your email. Choose your branch and role to personalize your experience.</p>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <h3>Upload Notes & PYQs</h3>
+            <p>Share your study notes and previous year question papers with the community.</p>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <h3>Learn & Excel</h3>
+            <p>Access quality material, prepare for exams, and connect with peers.</p>
+        </div>
+    </div>
+</section>
+
+
+
+<div class="cta">
+    <h2>Ready to Ace Your <span>Exams?</span></h2>
+    <p>Join thousands of students already sharing and discovering notes & PYQs.</p>
+    <div class="btn-group">
+        <a href="{% url 'signup' %}" class="btn pulse-ring">Get Started Free <i class="fas fa-arrow-right"></i></a>
+        <a href="{% url 'viewallnotes' %}" class="btn btn-outline">Browse Resources</a>
+    </div>
+</div>
 
 <div class="footer">
     <div class="box-container">
@@ -67,14 +527,12 @@
             <a href="{% url 'about' %}">about</a>
             <a href="{% url 'contact' %}">contact</a>
        </div>
-
         <div class="box">
             <h3>Accounts</h3>
             <a href="{% url 'signup' %}">create account</a>
             <a href="{% url 'login' %}">user login</a>
             <a href="{% url 'login_admin' %}">admin login</a>
         </div>
-
         <div class="box">
             <h3>Contact Info</h3>
             <p> <i class="fas fa-map-marker-alt"></i> Nagpur, India </p>
@@ -82,11 +540,25 @@
             <p> <i class="fas fa-phone"></i> +91 9623723169 </p>
         </div>
     </div>
-    <h1 class="credit">&copy; 2026 <a href="#">NotesShare</a>. All Rights Reserved</h1>
+    <h1 class="credit">&copy; 2026 <a href="#">NotesShare & PYQShare</a>. All Rights Reserved</h1>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{% static 'js/script.js' %}"></script>
+
+<script>
+$(document).ready(function() {
+    $('#menu').click(function() {
+        $(this).toggleClass('fa-times');
+        $('.navbar').toggleClass('nav-toggle');
+    });
+    $(window).on('load scroll', function() {
+        $('#menu').removeClass('fa-times');
+        $('.navbar').removeClass('nav-toggle');
+    });
+});
+
+</script>
 
 </body>
 </html>

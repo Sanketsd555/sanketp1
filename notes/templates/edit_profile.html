@@ -2,72 +2,88 @@
 {% load static %}
 {% block body %}
 
-<div class="container mt-5"
-		style="font-family: 'IBM Plex Sans', sans-serif;">
-		<div class="row">
-			<div class="col-sm-6 mt-5">
-				<h2 class="text-center text-danger">Edit Profile</h2>
-				<hr>
-				<form method="post">
-                    {% csrf_token %}
-					<div class="row register-form">
-						<div class="col-md-6">
-							<div class="form-group">
-								<label> First Name</label>
-                                <input type="text" class="form-control" value="{{data.user.first_name}}" name="firstname">
-							</div>
-						</div>
+<section style="padding: 4rem 7%; min-height: 90vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0F0C29, #302B63, #24243E); color: #fff;">
+    <div style="width: 100%; max-width: 1000px;">
+        <h1 style="font-size: 3.5rem; font-weight: 700; text-align: center; margin-bottom: 0.5rem; color: #fff;">
+            Edit <span style="background: linear-gradient(135deg, #6C63FF, #FF6584); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Profile</span>
+        </h1>
+        <p style="text-align: center; font-size: 1.5rem; color: #C8C8E0; margin-bottom: 4rem;">Update your personal information.</p>
 
-						<div class="col-md-6">
-							<div class="form-group">
-								<label> Last Name</label>
-                                <input type="text" class="form-control" value="{{data.user.last_name}}" name="lastname">
-							</div>
-						</div>
+        <div style="display: flex; align-items: center; gap: 5rem; flex-wrap: wrap;">
+            <div style="flex: 1 1 35rem;">
+                <img src="{% static 'images/editnotes.png' %}" style="width: 100%; max-width: 400px; display: block; margin: 0 auto; filter: drop-shadow(0 10px 30px rgba(108,99,255,0.2)); animation: floatImage 6s ease-in-out infinite;" alt="">
+                <style>
+                    @keyframes floatImage { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+                </style>
+            </div>
 
-						<div class="col-md-12">
-							<div class="form-group">
-								<label> Contact</label>
-								<input type="text" class="form-control" name="contact" value="{{data.contact}}">
-							</div>
-						</div>
+            <form method="post" style="flex: 1 1 40rem; max-width: 48rem; background: rgba(255,255,255,0.04); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.12); border-radius: 2rem; padding: 4rem; display: flex; flex-direction: column; gap: 2rem; box-shadow: 0 8px 40px rgba(0,0,0,0.3);">
+                {% csrf_token %}
 
-						<div class="col-md-12">
-							<div class="form-group">
-								<label> Email Address</label>
-								<input type="email" class="form-control" name="emailid" value="{{data.user.username}}" readonly>
-							</div>
-						</div>
+                <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 18rem; position: relative;">
+                        <i class="fas fa-user" style="position: absolute; left: 1.8rem; top: 50%; transform: translateY(-50%); font-size: 1.5rem; color: var(--text-secondary, #aaa); z-index: 2;"></i>
+                        <input type="text" value="{{data.user.first_name}}" name="firstname" style="height: 5.5rem; width: 100%; border: 1px solid rgba(255,255,255,0.3); border-radius: 1.2rem; padding: 0 1.8rem 0 5rem; font-size: 1.5rem; color: #fff; background: rgba(255,255,255,0.1); outline: none; transition: 0.3s;" placeholder="First Name">
+                    </div>
 
-						<div class="col-md-6">
-							<div class="form-group">
-								<label> Branch</label>
-								<select class="form-control" name="branch">
-									<option value="Computer Science">Computer Science</option>
-									<option value="Mechanical">Mechanical</option>
-									<option value="Civil">Civil</option>
-									<option value="Electronics">Electronics</option>
-									<option value="Electric">Electric</option>
-									<option value="IT">IT</option>
-								</select>
-							</div>
-						</div>
+                    <div style="flex: 1; min-width: 18rem; position: relative;">
+                        <i class="fas fa-user" style="position: absolute; left: 1.8rem; top: 50%; transform: translateY(-50%); font-size: 1.5rem; color: var(--text-secondary, #aaa); z-index: 2;"></i>
+                        <input type="text" value="{{data.user.last_name}}" name="lastname" style="height: 5.5rem; width: 100%; border: 1px solid rgba(255,255,255,0.3); border-radius: 1.2rem; padding: 0 1.8rem 0 5rem; font-size: 1.5rem; color: #fff; background: rgba(255,255,255,0.1); outline: none; transition: 0.3s;" placeholder="Last Name">
+                    </div>
+                </div>
 
-						<div class="form-group col-md-6 mt-2">
-							<br>
-							<input type="text" value="{{data.branch}}" class="form-control" readonly>
-						</div>
+                <div style="position: relative;">
+                    <i class="fas fa-phone-alt" style="position: absolute; left: 1.8rem; top: 50%; transform: translateY(-50%); font-size: 1.5rem; color: var(--text-secondary, #aaa); z-index: 2;"></i>
+                    <input type="text" name="contact" value="{{data.contact}}" style="height: 5.5rem; width: 100%; border: 1px solid rgba(255,255,255,0.3); border-radius: 1.2rem; padding: 0 1.8rem 0 5rem; font-size: 1.5rem; color: #fff; background: rgba(255,255,255,0.1); outline: none; transition: 0.3s;" placeholder="Contact Number">
+                </div>
 
-						<input type="submit" value="Update" class="btn btn-primary mt-3">
-					</div>
-			</form>
-			</div>
-			<div class="col-sm-6 mt-5">
-				<img src="{% static 'images/editnotes.png' %}" style="width: 90%; height: 450px">
-			</div>
+                <div style="position: relative;">
+                    <i class="fas fa-envelope" style="position: absolute; left: 1.8rem; top: 50%; transform: translateY(-50%); font-size: 1.5rem; color: var(--text-secondary, #aaa); z-index: 2;"></i>
+                    <input type="email" value="{{data.user.username}}" style="height: 5.5rem; width: 100%; border: 1px solid rgba(255,255,255,0.3); border-radius: 1.2rem; padding: 0 1.8rem 0 5rem; font-size: 1.5rem; color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.05); outline: none; transition: 0.3s; cursor: not-allowed;" readonly>
+                </div>
 
-		</div>
-	</div>
+                <div style="position: relative;">
+                    <i class="fas fa-graduation-cap" style="position: absolute; left: 1.8rem; top: 50%; transform: translateY(-50%); font-size: 1.5rem; color: var(--text-secondary, #aaa); z-index: 2;"></i>
+                    <select name="branch" style="height: 5.5rem; width: 100%; border: 1px solid rgba(255,255,255,0.3); border-radius: 1.2rem; padding: 0 1.8rem 0 5rem; font-size: 1.5rem; color: #fff; background: rgba(255,255,255,0.1); outline: none; transition: 0.3s; appearance: none; -webkit-appearance: none; cursor: pointer;">
+                        <option value="Computer Science" style="background: #2a2a4a; color: #fff;">Computer Science</option>
+                        <option value="Mechanical" style="background: #2a2a4a; color: #fff;">Mechanical</option>
+                        <option value="Civil" style="background: #2a2a4a; color: #fff;">Civil</option>
+                        <option value="Electronics" style="background: #2a2a4a; color: #fff;">Electronics</option>
+                        <option value="Electric" style="background: #2a2a4a; color: #fff;">Electric</option>
+                        <option value="IT" style="background: #2a2a4a; color: #fff;">IT</option>
+                    </select>
+                </div>
+
+                <button type="submit" style="width: 100%; padding: 1.4rem 3rem; font-size: 1.6rem; font-weight: 600; color: #fff; background: linear-gradient(135deg, #6C63FF, #FF6584); border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 20px rgba(108,99,255,0.4); display: flex; align-items: center; justify-content: center; gap: 1rem; transition: 0.3s;">
+                    Update Profile <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+document.querySelector('button[type="submit"]').addEventListener('mouseenter', function() {
+    this.style.transform = 'translateY(-3px)';
+    this.style.boxShadow = '0 8px 30px rgba(108,99,255,0.6)';
+});
+document.querySelector('button[type="submit"]').addEventListener('mouseleave', function() {
+    this.style.transform = '';
+    this.style.boxShadow = '';
+});
+document.querySelectorAll('input, select').forEach(el => {
+    el.addEventListener('focus', function() {
+        this.style.borderColor = '#6C63FF';
+        this.style.background = 'rgba(108,99,255,0.1)';
+        this.style.boxShadow = '0 0 0 3px rgba(108,99,255,0.15)';
+    });
+    el.addEventListener('blur', function() {
+        this.style.borderColor = 'rgba(255,255,255,0.3)';
+        this.style.background = 'rgba(255,255,255,0.1)';
+        this.style.boxShadow = 'none';
+    });
+});
+</script>
 
 {% if error %}
 <script>
@@ -75,6 +91,5 @@
 	window.location=('{% url 'profile' %}');
 </script>
 {% endif %}
-
 
 {% endblock %}

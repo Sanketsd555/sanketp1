@@ -94,6 +94,23 @@
                                     </ul>
                                 </li>
                                 <li>
+                                    <a class="nav-submenu" data-toggle="nav-submenu"><i class="fas fa-history"></i><span class="sidebar-mini-hide"></span>View PYQs</a>
+                                    <ul>
+                                        <li>
+                                            <a href="{% url 'pending_pyqs' %}">Pending PYQs</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'accepted_pyqs' %}">Accepted PYQs</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'rejected_pyqs' %}">Rejected PYQs</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'all_pyqs' %}">All PYQs</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
                                     <a  href="{% url 'view_users' %}"><i class="fas fa-eye"></i><span class="sidebar-mini-hide">View User</span></a>
                                 </li>
 

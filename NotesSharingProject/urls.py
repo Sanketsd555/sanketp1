@@ -34,6 +34,17 @@ urlpatterns = [
     path('unread_queries/', views.unread_queries, name='unread_queries'),
     path('read_queries/', views.read_queries, name='read_queries'),
     path('view_queries/<int:pid>/', views.view_queries, name='view_queries'),
+    path('upload_pyq/', views.upload_pyq, name='upload_pyq'),
+    path('view_mypyqs/', views.view_mypyqs, name='view_mypyqs'),
+    path('delete_mypyqs/<int:pid>/', views.delete_mypyqs, name='delete_mypyqs'),
+    path('view_allpyqs/', views.view_allpyqs, name='view_allpyqs'),
+    path('pending_pyqs/', views.pending_pyqs, name='pending_pyqs'),
+    path('accepted_pyqs/', views.accepted_pyqs, name='accepted_pyqs'),
+    path('rejected_pyqs/', views.rejected_pyqs, name='rejected_pyqs'),
+    path('all_pyqs/', views.all_pyqs, name='all_pyqs'),
+    path('assign_pyq_status/<int:pid>/', views.assign_pyq_status, name='assign_pyq_status'),
+    path('delete_pyq/<int:pid>/', views.delete_pyq, name='delete_pyq'),
+    path('viewallpyqs/', views.viewallpyqs, name='viewallpyqs'),
 ]
 
 if settings.DEBUG:

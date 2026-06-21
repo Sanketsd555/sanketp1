@@ -84,7 +84,11 @@ def admin_home(request):
     an = Notes.objects.filter(status="Accept").count()
     rn = Notes.objects.filter(status="Reject").count()
     alln = Notes.objects.all().count()
-    d = {'pn':pn,'an':an,'rn':rn,'alln':alln}
+    pp = Pyq.objects.filter(status="pending").count()
+    ap = Pyq.objects.filter(status="Accept").count()
+    rp = Pyq.objects.filter(status="Reject").count()
+    allp = Pyq.objects.all().count()
+    d = {'pn':pn,'an':an,'rn':rn,'alln':alln,'pp':pp,'ap':ap,'rp':rp,'allp':allp}
     return render(request,'admin_home.html',d)
 
 def Logout(request):
@@ -291,6 +295,106 @@ def read_queries(request):
         return redirect('login_admin')
     contact = Contact.objects.filter(isread="yes")
     return render(request,'read_queries.html', locals())
+
+def upload_pyq(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    error=""
+    if request.method=='POST':
+        b = request.POST['branch']
+        s = request.POST['subject']
+        n = request.FILES['pyqfile']
+        f = request.POST['filetype']
+        d = request.POST['description']
+        u = User.objects.filter(username=request.user.username).first()
+        try:
+            Pyq.objects.create(user=u,uploadingdate=date.today(),branch=b,subject=s,pyqfile=n,
+                                 filetype=f,description=d,status='pending')
+            error="no"
+        except:
+            error="yes"
+    return render(request,'upload_pyq.html', locals())
+
+def view_mypyqs(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    user = User.objects.get(id=request.user.id)
+    pyqs = Pyq.objects.filter(user = user)
+    d = {'pyqs':pyqs}
+    return render(request,'view_mypyqs.html',d)
+
+def delete_mypyqs(request,pid):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    pyqs = Pyq.objects.get(id=pid)
+    pyqs.delete()
+    return redirect('view_mypyqs')
+
+def view_allpyqs(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    user = User.objects.get(id=request.user.id)
+    pyqs = Pyq.objects.filter(user = user)
+    d = {'pyqs':pyqs}
+    return render(request,'view_allpyqs.html',d)
+
+def pending_pyqs(request):
+    if not request.user.is_authenticated:
+        return redirect('login_admin')
+    pyqs = Pyq.objects.filter(status = "pending")
+    d = {'pyqs':pyqs}
+    return render(request, 'pending_pyqs.html',d)
+
+def accepted_pyqs(request):
+    if not request.user.is_authenticated:
+        return redirect('login_admin')
+    pyqs = Pyq.objects.filter(status = "Accept")
+    d = {'pyqs':pyqs}
+    return render(request, 'accepted_pyqs.html',d)
+
+def rejected_pyqs(request):
+    if not request.user.is_authenticated:
+        return redirect('login_admin')
+    pyqs = Pyq.objects.filter(status = "Reject")
+    d = {'pyqs':pyqs}
+    return render(request, 'rejected_pyqs.html',d)
+
+def all_pyqs(request):
+    if not request.user.is_authenticated:
+        return redirect('login_admin')
+    pyqs = Pyq.objects.all()
+    d = {'pyqs':pyqs}
+    return render(request, 'all_pyqs.html',d)
+
+def assign_pyq_status(request,pid):
+    if not request.user.is_authenticated:
+        return redirect('login_admin')
+    pyqs = Pyq.objects.get(id=pid)
+    error = ""
+    if request.method=='POST':
+        s = request.POST['status']
+        try:
+            pyqs.status = s
+            pyqs.save()
+            error="no"
+        except:
+            error="yes"
+    d = {'pyqs':pyqs,'error':error}
+    return render(request, 'assign_pyq_status.html',d)
+
+def delete_pyq(request,pid):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    pyqs = Pyq.objects.get(id=pid)
+    pyqs.delete()
+    return redirect('all_pyqs')
+
+def viewallpyqs(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    pyqs = Pyq.objects.filter(status='Accept')
+    d = {'pyqs':pyqs}
+    return render(request, 'viewallpyqs.html',d)
 
 def view_queries(request,pid):
     if not request.user.is_authenticated:

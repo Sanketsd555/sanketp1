@@ -25,6 +25,19 @@ class Notes(models.Model):
         return self.user.username+" "+self.status
 
 
+class Pyq(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    uploadingdate = models.CharField(max_length=30)
+    branch = models.CharField(max_length=30)
+    subject = models.CharField(max_length=30)
+    pyqfile = models.FileField(null=True)
+    filetype = models.CharField(max_length=30)
+    description = models.CharField(max_length=200, null=True)
+    status = models.CharField(max_length=15)
+
+    def __str__(self):
+        return self.user.username+" "+self.status
+
 class Contact(models.Model):
     fullname = models.CharField(max_length=100, null=True)
     email = models.CharField(max_length=50, null=True)
