@@ -3,7 +3,7 @@ services:
     name: notes-sharing-app
     env: python
     buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate"
-    startCommand: "gunicorn NotesSharingProject.wsgi:app --workers=4 --bind=0.0.0.0:$PORT"
+    startCommand: "gunicorn NotesSharingProject.wsgi:app --workers=1 --threads=2 --bind=0.0.0.0:$PORT"
     envVars:
       - key: SECRET_KEY
         generateValue: true

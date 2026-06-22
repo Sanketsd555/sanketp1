@@ -1,1 +1,1 @@
-web: gunicorn NotesSharingProject.wsgi:app --workers=4 --bind=0.0.0.0:$PORT
+web: gunicorn NotesSharingProject.wsgi:app --workers=1 --threads=2 --bind=0.0.0.0:$PORT
