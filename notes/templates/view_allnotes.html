@@ -4,22 +4,47 @@
 
 <div class="container mt-5">
   <h1 class="text-success text-center"></h1>
-            <h4 class="text-center text-danger">View All Notes</h4>
-			<br>
-			<table class="table table-bordered" id="example">
-				<thead>
-					<tr>
-						<th>S.No</th>
-						<th>Uploaded By</th>
-						<th>Uploading Date</th>
-						<th>Branch</th>
-						<th>Subject</th>
-						<th>Download Notes</th>
-						<th>File Type</th>
-						<th>Description</th>
-					</tr>
-				</thead>
-			</table>
+  <h4 class="text-center text-danger">View All Notes</h4>
+  <br>
+  <div class="table-responsive">
+    <table class="table table-bordered" id="example">
+      <thead style="background-color : #607d8b;">
+        <tr>
+          <th>S.No</th>
+          <th>Uploaded By</th>
+          <th>Uploading Date</th>
+          <th>Branch</th>
+          <th>Subject</th>
+          <th>Download Notes</th>
+          <th>File Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for i in notes %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{i.user.username}}</td>
+          <td>{{i.uploadingdate}}</td>
+          <td>{{i.branch}}</td>
+          <td>{{i.subject}}</td>
+          <td class="text-center"><a href="{{i.notesfile.url}}" class="btn btn-success btn-sm" download>Download</a></td>
+          <td>{{i.filetype}}</td>
+          <td>{{i.description}}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 
+<script>
+$(document).ready(function() {
+    $('#example').DataTable({
+        scrollX: true,
+        autoWidth: true,
+        responsive: true
+    });
+});
+</script>
 {% endblock %}
