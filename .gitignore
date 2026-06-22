@@ -7,3 +7,6 @@ media/
 .idea/
 staticfiles/
 .env
+desktop.ini
+Thumbs.db
+*.log
