@@ -1,0 +1,82 @@
+{% extends 'navigation.html'%}
+{% load static %}
+{% block body %}
+
+{% if error == "no" %}
+<script>
+	window.location=('{% url 'profile' %}');
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+	alert('Invalid Login Credentials, Try Again');
+</script>
+{% endif %}
+
+<style>
+.userlog {
+    min-height: auto !important;
+    padding: 8rem 7% 3rem !important;
+}
+.userlog .heading {
+    font-size: 2.2rem !important;
+    margin-bottom: 0.2rem !important;
+}
+.userlog .sub-heading {
+    font-size: 1.1rem !important;
+    margin-bottom: 1.5rem !important;
+}
+.userlog .row { gap: 2rem !important; }
+.userlog .row .image img { height: 25vh !important; }
+.userlog .row form {
+    padding: 2rem !important;
+    gap: 1rem !important;
+    border-radius: 1.2rem !important;
+}
+.userlog .row form .box {
+    height: 3.8rem !important;
+    font-size: 1.2rem !important;
+    padding: 0 1.2rem 0 3.8rem !important;
+    border-radius: 0.8rem !important;
+}
+.userlog .row form .input-group .input-icon {
+    font-size: 1.1rem !important;
+    left: 1.2rem !important;
+}
+.userlog .row form p { font-size: 1.1rem !important; margin: 0 !important; }
+.userlog .row form .btn {
+    padding: 0.8rem 2rem !important;
+    font-size: 1.2rem !important;
+    margin: 0 !important;
+}
+</style>
+
+<section class="userlog" id="userlog">
+<h1 class="heading reveal">User <span>Login</span></h1>
+<p class="sub-heading reveal">Welcome back! Login to access your notes dashboard.</p>
+
+<div class="row">
+    <div class="image reveal-left">
+        <img src="{% static 'images/webinar-pana.png' %}" alt="">
+    </div>
+    <form method="post" class="reveal-right">
+        {% csrf_token %}
+
+        <div class="input-group">
+            <i class="fas fa-envelope input-icon"></i>
+            <input type="email" placeholder="Enter Email ID" name="emailid" class="box">
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" placeholder="Enter Password" name="pwd" class="box">
+        </div>
+
+        <p>Don't have an account? <a href="{% url 'signup' %}">Register now</a></p>
+        <button type="submit" class="btn">Login <i class="fas fa-arrow-right"></i></button>
+    </form>
+</div>
+</section>
+
+{% endblock %}

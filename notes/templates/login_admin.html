@@ -1,0 +1,45 @@
+{% extends 'navigation.html'%}
+{% load static %}
+{% block body %}
+
+{% if error == "no" %}
+<script>
+	alert('Logged In Successfully...');
+	window.location=('{% url 'admin_home' %}')
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+	alert('Invalid Login Credentials, Try Again');
+</script>
+
+{% endif %}
+
+<section class="adminlog" id="adminlog">
+<h1 class="heading reveal">Admin <span>Login</span></h1>
+<p class="sub-heading reveal" style="transition-delay: 0.15s;">Access the admin dashboard to manage notes and users.</p>
+
+<div class="row">
+    <div class="image reveal-left">
+        <img src="{% static 'images/Kids Studying from Home-rafiki.png' %}" alt="">
+    </div>
+    <form method="post" class="reveal-right">
+        {% csrf_token %}
+
+        <div class="input-group">
+            <i class="fas fa-user-shield input-icon"></i>
+            <input type="text" placeholder="Enter Username" name="uname" class="box">
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" placeholder="Enter Password" name="pwd" class="box">
+        </div>
+
+        <button type="submit" class="btn">Login <i class="fas fa-arrow-right"></i></button>
+    </form>
+</div>
+</section>
+
+{% endblock %}

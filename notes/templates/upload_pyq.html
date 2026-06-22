@@ -1,0 +1,114 @@
+{% extends 'usernavigation.html'%}
+{% load static %}
+{% block body %}
+
+{% if error == "no" %}
+<script>
+	alert('PYQ Uploaded Successfully');
+    window.location=('{% url 'view_mypyqs' %}');
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+	alert('Something went wrong, Try Again');
+</script>
+{% endif %}
+
+<div class="container py-5">
+    <div class="upload-card">
+        <div class="upload-card-header">
+            <div class="header-icon" style="background: linear-gradient(135deg, #FF6584, #6C63FF);">
+                <i class="fas fa-history"></i>
+            </div>
+            <div>
+                <h2 class="mb-1">Upload PYQ</h2>
+                <p class="mb-0 header-sub">Share previous year question papers with fellow students</p>
+            </div>
+        </div>
+
+        <div class="upload-card-body">
+            <div class="row g-4">
+                <div class="col-lg-5 d-flex align-items-center justify-content-center">
+                    <div class="upload-illustration">
+                        <img src="{% static 'images/Book lover-bro.png' %}" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+                <div class="col-lg-7">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="fas fa-code-branch"></i> Branch</label>
+                                    <select class="form-control" name="branch" required>
+                                        <option value="">Select Branch</option>
+                                        <option value="Computer Science">Computer Science</option>
+                                        <option value="Mechanical">Mechanical</option>
+                                        <option value="Civil">Civil</option>
+                                        <option value="Electronics">Electronics</option>
+                                        <option value="Electric">Electric</option>
+                                        <option value="IT">IT</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="fas fa-file-alt"></i> File Type</label>
+                                    <select class="form-control" name="filetype" required>
+                                        <option value="">Select File Type</option>
+                                        <option value="PDF">PDF</option>
+                                        <option value="PPT">PPT</option>
+                                        <option value="DOC/DOCX">DOC/DOCX</option>
+                                        <option value="TXT">TXT</option>
+                                        <option value="Image">Image</option>
+                                        <option value="ZIP/RAR">ZIP/RAR</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label><i class="fas fa-book"></i> Subject</label>
+                                    <input type="text" class="form-control" placeholder="e.g. Data Structures, Calculus, Physics" name="subject" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label><i class="fas fa-file"></i> PYQ File</label>
+                                    <div class="file-drop-area">
+                                        <div class="file-icon">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                        </div>
+                                        <p class="file-text">Drag & drop or <span class="file-link">browse</span> your PYQ file</p>
+                                        <p class="file-hint">PDF, PPT, DOC, TXT &mdash; Max 10MB</p>
+                                        <input type="file" name="pyqfile" class="form-control-file" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label><i class="fas fa-align-left"></i> Description</label>
+                                    <textarea class="form-control" rows="4" name="description" placeholder="Write a brief description about the PYQ..."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-upload" style="background: linear-gradient(135deg, #FF6584, #6C63FF);">
+                                    <i class="fas fa-upload"></i> Upload PYQ
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'navigation.html'%}
+{% load static %}
+{% block body %}
+
+{% if error == "no" %}
+     <script>
+	   alert('Your Message has been Send Successfully');
+	   window.location=('{% url 'contact' %}');
+     </script>
+{% endif %}
+
+{% if error == "yes" %}
+     <script>
+	    alert('Something went wrong, Try Again');
+     </script>
+{% endif %}
+
+<section class="contact" id="contact">
+<h1 class="heading reveal">Get In <span>Touch</span></h1>
+<p class="sub-heading reveal" style="transition-delay: 0.15s;">Have a question or feedback? We'd love to hear from you.</p>
+
+<div class="row">
+
+    <form method="post" class="reveal-left">
+        {% csrf_token %} 
+
+        <div class="input-group half">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" placeholder="Full Name" name="fullname" class="box">
+        </div>
+
+        <div class="input-group half">
+            <i class="fas fa-envelope input-icon"></i>
+            <input type="email" placeholder="Your Email" name="email" class="box">
+        </div>
+
+        <div class="input-group half">
+            <i class="fas fa-phone input-icon"></i>
+            <input type="number" placeholder="Contact Number" name="mobile" class="box">
+        </div>
+
+        <div class="input-group half">
+            <i class="fas fa-tag input-icon"></i>
+            <input type="text" placeholder="Subject" name="subject" class="box">
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-comment input-icon" style="top: 2.5rem; transform: none;"></i>
+            <textarea name="message" cols="30" rows="6" class="box address" placeholder="Your Message..."></textarea>
+        </div>
+
+        <button type="submit" class="btn">Send Message <i class="fas fa-paper-plane"></i></button>
+    </form>
+
+    <div class="image reveal-right">
+        <img src="{% static 'images/Learning-pana.png' %}" alt="">
+    </div>
+
+</div>
+</section>
+{% endblock %}

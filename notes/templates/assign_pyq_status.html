@@ -1,0 +1,39 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+{% block body %}
+
+{% if error == "no" %}
+<script>
+    alert('Status Updated Successfully');
+    window.location=('{% url 'all_pyqs' %}');
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert('Something went wrong, Try Again');
+</script>
+{% endif %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <br><br>
+            <h2 class="text-center">Assign Status to PYQ</h2>
+            <hr>
+            <form method="post">
+                {% csrf_token %}
+                <label>PYQ ID</label>
+                <input type="text" name="notesid" value="{{pyqs.id}}" class="form-control" readonly>
+                <label>Status</label>
+                <select name="status" class="form-control">
+                    <option value="Accept">Accept</option>
+                    <option value="Reject">Reject</option>
+                </select>
+                <br>
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

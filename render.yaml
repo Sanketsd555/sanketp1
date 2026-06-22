@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: notes-sharing-app
+    runtime: python
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate"
+    startCommand: "gunicorn NotesSharingProject.wsgi:app --workers=4 --bind=0.0.0.0:$PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: notes-sharing-db
+          property: connectionString
+    autoDeploy: true
+
+databases:
+  - name: notes-sharing-db
+    databaseName: notes_sharing
+    plan: free
