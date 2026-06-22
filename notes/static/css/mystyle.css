@@ -220,6 +220,10 @@ body {
     font-size: 1.4rem;
 }
 
+input, select, textarea, button {
+    font-size: 16px;
+}
+
 .form-control:focus {
     background: rgba(108, 99, 255, 0.15);
     border-color: #6C63FF;
@@ -888,7 +892,7 @@ a:hover {
     }
 
     .form-control {
-        font-size: 1.3rem;
+        font-size: 16px;
         padding: 0.8rem 1.2rem;
     }
 
@@ -942,7 +946,7 @@ a:hover {
     }
 
     .upload-card-body .form-control {
-        font-size: 1.3rem;
+        font-size: 16px;
         height: 4.2rem;
     }
 
@@ -1023,7 +1027,7 @@ a:hover {
 
     .upload-card-body .form-control {
         height: 3.8rem;
-        font-size: 1.2rem;
+        font-size: 16px;
         padding: 0.6rem 1rem;
     }
 
