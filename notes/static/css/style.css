@@ -784,6 +784,8 @@ select.box:valid {
 @media (max-width: 768px) {
     html { font-size: 55%; }
 
+    header { padding: 1.5rem 4%; }
+
     header #menu { display: block; }
 
     header .navbar {
@@ -825,6 +827,7 @@ select.box:valid {
     .home p {
         width: auto;
         font-size: 1.6rem;
+        padding: 1rem 2rem;
     }
 
     .about .features-grid {
@@ -846,10 +849,38 @@ select.box:valid {
     .heading {
         font-size: 3.5rem;
     }
+
+    section {
+        padding: 2rem 4%;
+        padding-top: 8rem;
+    }
+
+    .footer {
+        padding: 3rem 4% 2rem;
+    }
+
+    .userlog .row form,
+    .signup .row form,
+    .contact .row form,
+    .adminlog .row form {
+        max-width: 100%;
+        padding: 2.5rem;
+    }
+
+    .signup .row form .input-group.half {
+        width: 100%;
+    }
+
+    .hero-tags {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 @media (max-width: 500px) {
     html { font-size: 50%; }
+
+    header { padding: 1.2rem 3%; }
 
     .home h1 {
         font-size: 3.5rem;
@@ -858,6 +889,52 @@ select.box:valid {
     .btn {
         padding: 1rem 2.5rem;
         font-size: 1.3rem;
+    }
+
+    section {
+        padding: 1.5rem 3%;
+        padding-top: 7rem;
+    }
+
+    .home .hero-content {
+        padding: 0 1rem;
+    }
+
+    .home h1 { font-size: 2.8rem; }
+
+    .home p { font-size: 1.4rem; }
+
+    .heading { font-size: 2.5rem; }
+
+    .about .content h3 { font-size: 2.2rem; }
+
+    .about .image img { height: auto; max-height: 30vh; }
+
+    .footer .box-container .box { flex: 1 1 100%; }
+
+    .stats .box-container { grid-template-columns: 1fr; }
+
+    .cta-section h2 { font-size: 2.5rem; }
+
+    .how-it-works .steps { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 400px) {
+    html { font-size: 45%; }
+
+    header { padding: 1rem 2%; }
+
+    section { padding: 1rem 2%; padding-top: 6rem; }
+
+    .home h1 { font-size: 2.4rem; }
+
+    .btn { padding: 0.8rem 2rem; font-size: 1.2rem; }
+
+    .userlog .row form,
+    .signup .row form,
+    .contact .row form,
+    .adminlog .row form {
+        padding: 2rem 1.5rem;
     }
 }
 
@@ -1115,6 +1192,10 @@ select.box:valid {
 }
 
 @media (max-width: 768px) {
+    .how-it-works .steps {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
     .how-it-works .steps::before { display: none; }
 }
 

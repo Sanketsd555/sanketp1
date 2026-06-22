@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from django.db.backends.signals import connection_created
 import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -62,8 +63,19 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
+            'OPTIONS': {'timeout': 20},
         }
     }
+
+def activate_wal_mode(sender, connection, **kwargs):
+    if connection.vendor == 'sqlite':
+        cursor = connection.cursor()
+        cursor.execute('PRAGMA journal_mode=WAL;')
+        cursor.execute('PRAGMA synchronous=NORMAL;')
+        cursor.execute('PRAGMA busy_timeout=20000;')
+        cursor.close()
+
+connection_created.connect(activate_wal_mode)
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},

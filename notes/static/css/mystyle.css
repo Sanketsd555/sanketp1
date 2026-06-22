@@ -830,3 +830,248 @@ a:hover {
         font-size: 1.8rem;
     }
 }
+
+@media (max-width: 768px) {
+    .container {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .navbar {
+        padding: 0.6rem 1rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.8rem;
+    }
+
+    .nav-link {
+        font-size: 1.2rem;
+        padding: 0.6rem 1.2rem !important;
+        margin: 0.2rem 0;
+    }
+
+    .navbar-nav {
+        gap: 0;
+        padding-top: 0.5rem;
+    }
+
+    .dropdown .btn-primary {
+        margin-left: 0;
+        width: 100%;
+        margin-top: 0.5rem;
+        font-size: 1.2rem;
+        padding: 0.6rem 1.5rem;
+    }
+
+    .transparentbox {
+        height: 300px;
+    }
+
+    .transparentbox p {
+        margin-top: 5%;
+        font-size: 4rem;
+    }
+
+    .card {
+        margin-bottom: 1.5rem;
+    }
+
+    .card-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-control {
+        font-size: 1.3rem;
+        padding: 0.8rem 1.2rem;
+    }
+
+    label {
+        font-size: 1.3rem;
+    }
+
+    .dataTables_wrapper .dataTables_filter input {
+        width: auto;
+        max-width: 150px;
+    }
+
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter {
+        text-align: left;
+    }
+
+    .dataTables_wrapper .dataTables_filter {
+        margin-top: 0.5rem;
+    }
+
+    .btn-block {
+        font-size: 1.3rem;
+        padding: 1rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .upload-card-body {
+        padding: 1.5rem;
+    }
+
+    .upload-card-header {
+        padding: 1.5rem;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .upload-card-header .header-icon {
+        margin: 0 auto;
+    }
+
+    .upload-card-header h2 {
+        font-size: 1.6rem;
+    }
+
+    .upload-card-body .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .upload-card-body .form-control {
+        font-size: 1.3rem;
+        height: 4.2rem;
+    }
+
+    .upload-card-body textarea.form-control {
+        min-height: 10rem;
+    }
+
+    .btn-upload {
+        font-size: 1.4rem;
+        padding: 1.2rem;
+    }
+
+    .file-drop-area {
+        padding: 2rem 1rem;
+    }
+
+    .file-drop-area .file-icon {
+        font-size: 2.5rem;
+    }
+
+    .file-drop-area .file-text {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .navbar-brand {
+        font-size: 1.6rem;
+    }
+
+    .transparentbox {
+        height: 220px;
+    }
+
+    .transparentbox p {
+        font-size: 3rem;
+    }
+
+    .halfcircle,
+    .halfcircleBottom {
+        width: 100px;
+        height: 55px;
+    }
+
+    .halfcircle {
+        border-radius: 60px 60px 0 0;
+    }
+
+    .halfcircleBottom {
+        border-radius: 0 0 60px 60px;
+    }
+
+    .table {
+        font-size: 1.2rem;
+    }
+
+    .btn {
+        font-size: 1.2rem;
+        padding: 0.5rem 1.5rem;
+    }
+
+    .dataTables_wrapper .dataTables_filter input {
+        max-width: 120px;
+    }
+
+    .upload-card-body {
+        padding: 1rem;
+    }
+
+    .upload-card-header {
+        padding: 1.2rem;
+    }
+
+    .upload-card-body .form-control {
+        height: 3.8rem;
+        font-size: 1.2rem;
+        padding: 0.6rem 1rem;
+    }
+
+    .upload-card-body label {
+        font-size: 1.2rem;
+    }
+
+    .dropdown-menu {
+        min-width: auto;
+    }
+
+    .card-body {
+        padding: 1.2rem;
+    }
+
+    .file-drop-area {
+        padding: 1.5rem 0.8rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .transparentbox {
+        height: 180px;
+    }
+
+    .transparentbox p {
+        font-size: 2.5rem;
+        margin-top: 3%;
+    }
+
+    .navbar-brand {
+        font-size: 1.4rem;
+    }
+
+    .nav-link {
+        font-size: 1.1rem;
+        padding: 0.4rem 1rem !important;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .card-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .upload-card-header h2 {
+        font-size: 1.4rem;
+    }
+}
