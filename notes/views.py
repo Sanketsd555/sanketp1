@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from .models import *
 from django.contrib.auth import authenticate, logout, login
 from datetime import date
+import logging
+
+logger = logging.getLogger(__name__)
 # Create your views here.
 
 def about(request):
@@ -73,7 +76,8 @@ def signup1(request):
             user = User.objects.create_user(username=e,password=p,first_name=f,last_name=l)
             Signup.objects.create(user=user, contact=c,branch=b,role=r)
             error="no"
-        except:
+        except Exception as e:
+            logger.error(f"Signup failed: {e}")
             error="yes"
     return render(request,'signup.html', locals())
 

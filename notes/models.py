@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Signup(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    contact = models.CharField(max_length=10)
+    contact = models.CharField(max_length=15)
     branch = models.CharField(max_length=30)
     role = models.CharField(max_length=15)
 
