@@ -23,8 +23,8 @@ except Exception:
 from django.contrib.auth import get_user_model
 User = get_user_model()
 if not User.objects.filter(is_staff=True).exists():
-    admin_user = os.environ.get('ADMIN_USERNAME', 'admin')
-    admin_pass = os.environ.get('ADMIN_PASSWORD', 'admin123')
+    admin_user = os.environ.get('ADMIN_USERNAME', 'sansh')
+    admin_pass = os.environ.get('ADMIN_PASSWORD', 'sansh123')
     User.objects.create_superuser(username=admin_user, password=admin_pass, email='admin@noteshare.com')
 
 from django.core.wsgi import get_wsgi_application
